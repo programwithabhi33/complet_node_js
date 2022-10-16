@@ -8,25 +8,33 @@ const port = 3000
 app.use('/static', express.static(path.join(__dirname, '/public')))
 
 
+app.set('view engine', 'pug')
+
+app.set('views', path.join(__dirname, '/public/'))
+
+
+
 app.get('/', (req, res) => {
     res.status(200);
-    // res.send('Hello World!')
-    console.log(__dirname)
-    // fs.readFile(__dirname + '/public/index.html', 'utf8', (err, text) => {
-    //     // console.log(err)
-    //     res.send(text);
-    // });
-    res.sendFile(path.join(__dirname, '/public/index.html'));
+    // res.sendFile(path.join(__dirname, '/public/index.html'));
+    res.render('index')
 })
+
 
 app.get('/about', (req, res) => {
     res.status(200);
-    res.send('About page')
+
+    // res.sendFile(path.join(__dirname, '/public/about.html'));
+    res.render('about')
 })
-app.get('/blog', (req, res) => {
+
+
+app.get('/test', (req, res) => {
     res.status(200);
-    res.send('blog page')
+    // res.sendFile(path.join(__dirname, '/public/test.pug'));
+    res.render('test', { title: 'Hey', message: 'Hello there!' })
 })
+
 
 
 app.listen(port, () => {
